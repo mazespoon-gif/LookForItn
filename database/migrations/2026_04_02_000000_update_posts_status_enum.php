@@ -7,9 +7,12 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (DB::connection()->getDriverName() !== 'pgsql') {
+            return;
+        }
+
         DB::statement("ALTER TABLE posts ALTER COLUMN status DROP DEFAULT");
         
-        // Create enum type
         DB::statement("DO $$ 
             BEGIN 
                 IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'posts_status_enum') THEN 
@@ -19,7 +22,6 @@ return new class extends Migration
         DB::statement("ALTER TYPE posts_status_enum ADD VALUE IF NOT EXISTS 'pending'");
         DB::statement("ALTER TYPE posts_status_enum ADD VALUE IF NOT EXISTS 'returned'");
         
-        // Add temp column and swap
         DB::statement("ALTER TABLE posts ADD COLUMN status_new posts_status_enum");
         DB::statement("UPDATE posts SET status_new = status::posts_status_enum");
         DB::statement("ALTER TABLE posts DROP COLUMN status");
@@ -29,6 +31,10 @@ return new class extends Migration
 
     public function down(): void
     {
+        if (DB::connection()->getDriverName() !== 'pgsql') {
+            return;
+        }
+
         DB::statement("ALTER TABLE posts ADD COLUMN status_old VARCHAR(50)");
         DB::statement("UPDATE posts SET status_old = status::text");
         DB::statement("ALTER TABLE posts DROP COLUMN status");
