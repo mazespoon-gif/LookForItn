@@ -3,11 +3,12 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Landing page</title>
+        <title>LookForIt</title>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         </style>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireStyles
     </head>
     <body class="bg-white">
         <nav
@@ -31,9 +32,10 @@
                 <!-- Navigation Links -->
                 <div class="hidden sm:flex sm:items-center sm:gap-6">
                     <a
-                        href="#"
+                        href="{{ route('guideline') }}"
+                        wire:navigate
                         class="text-gray-500 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors"
-                        >About</a
+                        >Guideline</a
                     >
                     <a
                         href="#faq"
@@ -42,6 +44,7 @@
                     >
                     <a
                         href="{{ route('login') }}"
+                        wire:navigate
                         class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bolder bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors shadow-sm"
                     >
                         Sign In
@@ -98,9 +101,9 @@
             >
                 <div class="pt-2 pb-3 space-y-1">
                     <a
-                        href="#"
+                        href="{{ route('guideline') }}"
                         class="block text-gray-600 hover:text-indigo-600 hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium"
-                        >About</a
+                        >Guideline</a
                     >
                     <a
                         href="#faq"
@@ -110,6 +113,7 @@
                     <div class="mt-4 pt-4 border-t border-gray-100">
                         <a
                             href="{{ route('login') }}"
+                            wire:navigate
                             class="block w-full text-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
                         >
                             Sign In
@@ -138,7 +142,8 @@
             If not Get started -->
                 <div class="flex justify-center gap-3 w-full mt-2">
                     @auth
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('dashboard') }}"
+                        wire:navigate>
                         <button
                             class="flex items-center gap-2 bg-blue-700 hover:bg-indigo-700 text-white text-sm px-6 py-3 mt-6 rounded-lg transition cursor-pointer group"
                         >
@@ -173,7 +178,8 @@
                         </button>
                     </a>
                     @else
-                    <a href="{{ route('register') }}">
+                    <a href="{{ route('register') }}"
+                        wire:navigate>
                         <button
                             class="flex items-center gap-2 bg-blue-700 hover:bg-indigo-700 text-white text-sm px-6 py-3 mt-6 rounded-lg transition cursor-pointer group"
                         >
@@ -276,7 +282,7 @@
             </div>
         </div>
         <!-- for now this is a placeholder because i don't know the content should i put  -->
-        <div class="mt-2 w-full p-2 h-screen">
+        <div class="mt-2 w-full p-2 ">
             <h1 class="text-3xl text-black font-semibold text-center mx-auto">
                 The Main features
             </h1>
@@ -334,10 +340,10 @@
             </div>
         </div>
         <!--this is about area-->
-        
+
 
         <!--Here is the FQA section is here -->
-        <div id="faq" class="w-full p-2 h-screen">
+        <div id="faq" class="w-full p-2 ">
             <div class="mt-10">
                 <h2 class="text-center text-indigo-600 font-bold text-3xl">
                     FQA
@@ -665,7 +671,7 @@
                     </a>
 
                     <a
-                        href="#"
+                        href="https://github.com/mazespoon-gif/LookForItn"
                         class="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
                         aria-label="Github"
                     >
@@ -683,5 +689,6 @@
                 </div>
             </div>
         </footer>
+    @livewireScripts
     </body>
 </html>

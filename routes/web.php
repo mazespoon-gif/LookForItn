@@ -10,6 +10,9 @@ use App\Http\Controllers\StorageController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::view("/", "welcome")->name("home");
+Route::get("/guideline", function () {
+    return view("guideline");
+})->name("guideline");
 
 Route::get("test-storage", function () {
     return "Storage controller working!";
